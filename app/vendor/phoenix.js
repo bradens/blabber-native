@@ -85,9 +85,6 @@
 // `channel.leave()`
 //
 
-window.navigator.userAgent = 'react-native';
-import io from 'socket.io-client/socket.io';
-
 const VSN = "1.0.0"
 const SOCKET_STATES = {connecting: 0, open: 1, closing: 2, closed: 3}
 const DEFAULT_TIMEOUT = 10000

@@ -1,5 +1,7 @@
-import { LOBBY_ROOM_KEY, SOCKET_NEW_MSG } from '../constants';
+import { default as constants } from '../constants';
 import Server from '../server';
+
+const { LOBBY_ROOM_KEY, SOCKET_NEW_MSG } = constants;
 
 export const
   RECEIVE_MESSAGES = 'RECEIVE_MESSAGES',

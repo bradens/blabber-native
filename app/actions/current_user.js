@@ -1,5 +1,7 @@
-import { LOBBY_ROOM_KEY, SOCKET_SET_NAME } from '../constants';
+import { default as constants } from '../constants'
 import Server from '../server';
+
+const { LOBBY_ROOM_KEY, SOCKET_SET_NAME } = constants;
 
 export const
   SET_CURRENT_USER = 'SET_CURRENT_USER';
