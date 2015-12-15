@@ -1,27 +1,14 @@
+import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import React from 'react-native';
 import _ from 'lodash';
 
 const { Component, Text, StyleSheet, View, ScrollView } = React;
 
 export default class Feed extends Component {
-  // Use this to keep our list always scrolled to the bottom
+  // use this to keep our list always scrolled to the bottom
   componentDidUpdate() {
-    let innerScrollView = this._scrollView.refs.InnerScrollView;
-    let scrollView = this._scrollView.refs.ScrollView;
-
-    requestAnimationFrame(() => {
-      innerScrollView.measure((innerScrollViewX, innerScrollViewY, innerScrollViewWidth, innerScrollViewHeight) => {
-        scrollView.measure((scrollViewX, scrollViewY, scrollViewWidth, scrollViewHeight) => {
-          var scrollTo = innerScrollViewHeight - scrollViewHeight + innerScrollViewY;
-
-          if (innerScrollViewHeight < scrollViewHeight) {
-              return;
-          }
-
-          this._scrollView.scrollTo(scrollTo);
-        });
-      });
-    });
+    window.scroller = this.refs.feed
+    this.refs.feed.scrollTo(0);
   }
 
   renderMessage = (message, index) => {
@@ -37,12 +24,15 @@ export default class Feed extends Component {
 
   render() {
     return (
-      <ScrollView
-        ref={component => this._scrollView = component }
+      <InvertibleScrollView
+        ref='feed'
         style={styles.feed}
+        renderScrollView={
+          (props) => <InvertibleScrollView {...props} inverted />
+        }
         showsHorizontalScrollIndicators={false}>
         { this.props.messages.map((message, i) => this.renderMessage(message, i)) }
-      </ScrollView>
+      </InvertibleScrollView>
     );
   }
 }

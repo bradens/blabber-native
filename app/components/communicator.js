@@ -14,7 +14,7 @@ export default class Communicator extends Component {
   }
 
   sendMessage = () => {
-    if (this.state.message === "" || !this.state.message)
+    if (this.state.message === '' || !this.state.message)
       return
 
     this.props.sendMessage(this.props.currentUser, this.state.message);

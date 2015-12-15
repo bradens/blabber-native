@@ -38,8 +38,8 @@ export default class Home extends Component {
         content={<Sidebar onFocused={this.onFocused} { ...this.props } />}
         onOpen={this.onOpen}
         onClose={this.onClose}>
-        <ScrollView ref='scrollView' style={styles.container}>
-          <Feed ref='feed' {...this.props} />
+        <ScrollView ref='scrollView' keyboardDismissMode='interactive' style={styles.container}>
+          <Feed {...this.props} />
           <Communicator onFocused={this.onFocused} {...this.props} />
         </ScrollView>
       </Drawer>

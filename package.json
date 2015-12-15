@@ -11,6 +11,7 @@
     "react": "0.14.3",
     "react-native": "^0.16.0",
     "react-native-drawer": "^1.10.1",
+    "react-native-invertible-scroll-view": "^0.1.2",
     "react-redux": "3.1.0",
     "redux": "3.0.4",
     "redux-thunk": "^1.0.0",
