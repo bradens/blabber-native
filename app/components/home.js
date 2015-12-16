@@ -78,6 +78,11 @@ export default class Home extends Component {
               marginRight: 10,
               flex: 0,
             },
+            sendButton: {
+              height: 40,
+              padding: 10,
+              marginLeft: 10
+            },
             imagePosition: {
               width: 5
             }
