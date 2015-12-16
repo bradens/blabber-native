@@ -71569,11 +71569,10 @@ _this12.callback();},
 this.timerCalc(this.tries+1));})}]);return Timer;})();
 });
 __d('BlabberNative/app/constants.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});exports.default={
-
+BLABBER_ADDRESS:'localhost:4000',
 SOCKET_NEW_MSG:'new:msg',
 SOCKET_SET_NAME:'set:username',
-LOBBY_ROOM_KEY:'rooms:lobby',
-BLABBER_ADDRESS:'52.35.104.41'};
+LOBBY_ROOM_KEY:'rooms:lobby'};
 });
 __d('BlabberNative/app/actions/user.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var 
 DISCONNECT_USERS=exports.DISCONNECT_USERS='DISCONNECT_USERS',
@@ -71721,15 +71720,28 @@ __d('BlabberNative/app/components/home.js',function(global, require, module, exp
 
 
 
-Component=_reactNative2.default.Component;var View=_reactNative2.default.View;var Text=_reactNative2.default.Text;var StyleSheet=_reactNative2.default.StyleSheet;var StatusBarIOS=_reactNative2.default.StatusBarIOS;var 
+ScrollView=_reactNative2.default.ScrollView;var Component=_reactNative2.default.Component;var View=_reactNative2.default.View;var Text=_reactNative2.default.Text;var StyleSheet=_reactNative2.default.StyleSheet;var StatusBarIOS=_reactNative2.default.StatusBarIOS;var 
 
-Home=(function(_Component){babelHelpers.inherits(Home,_Component);function Home(){babelHelpers.classCallCheck(this,Home);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(Home).apply(this,arguments));}babelHelpers.createClass(Home,[{key:'onOpen',value:function onOpen()
-{
-StatusBarIOS.setHidden(true,'slide');}},{key:'onClose',value:function onClose()
+Home=(function(_Component){babelHelpers.inherits(Home,_Component);function Home(){var _Object$getPrototypeO;var _temp,_this,_ret;babelHelpers.classCallCheck(this,Home);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=babelHelpers.possibleConstructorReturn(this,(_Object$getPrototypeO=Object.getPrototypeOf(Home)).call.apply(_Object$getPrototypeO,[this].concat(args))),_this),_this.
 
 
-{
-StatusBarIOS.setHidden(false,'slide');}},{key:'render',value:function render()
+
+
+
+
+
+
+_scrollToInput=function(inputRef){
+var scrollView=_this.refs.scrollView.getScrollResponder();
+scrollView.scrollResponderScrollNativeHandleToKeyboard(
+_reactNative2.default.findNodeHandle(inputRef),
+20,
+true);},_this.
+
+
+
+onFocused=function(inputRef){
+_this._scrollToInput(inputRef);},_temp),babelHelpers.possibleConstructorReturn(_this,_ret);}babelHelpers.createClass(Home,[{key:'onOpen',value:function onOpen(){StatusBarIOS.setHidden(true,'slide');}},{key:'onClose',value:function onClose(){StatusBarIOS.setHidden(false,'slide');}},{key:'render',value:function render()
 
 
 {
@@ -71739,12 +71751,12 @@ openDrawerOffset:100,
 tapToClose:true,
 styles:{main:{shadowColor:'#000000',shadowOpacity:0.4,shadowRadius:3}},
 tweenHandler:_reactNativeDrawer2.default.tweenPresets.parallax,
-content:_reactNative2.default.createElement(_sidebar2.default,this.props),
+content:_reactNative2.default.createElement(_sidebar2.default,babelHelpers.extends({onFocused:this.onFocused},this.props)),
 onOpen:this.onOpen,
 onClose:this.onClose},
-_reactNative2.default.createElement(View,{style:styles.container},
+_reactNative2.default.createElement(ScrollView,{ref:'scrollView',keyboardDismissMode:'interactive',style:styles.container},
 _reactNative2.default.createElement(_feed2.default,this.props),
-_reactNative2.default.createElement(_communicator2.default,this.props))));}}]);return Home;})(Component);exports.default=Home;
+_reactNative2.default.createElement(_communicator2.default,babelHelpers.extends({onFocused:this.onFocused},this.props)))));}}]);return Home;})(Component);exports.default=Home;
 
 
 
@@ -71757,26 +71769,13 @@ paddingTop:20,
 flex:1,
 backgroundColor:'#f5f5f5'}});
 });
-__d('BlabberNative/app/components/feed.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);var _lodash=require('lodash/index.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);var 
+__d('BlabberNative/app/components/feed.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var _reactNativeInvertibleScrollView=require('react-native-invertible-scroll-view/InvertibleScrollView.js');var _reactNativeInvertibleScrollView2=babelHelpers.interopRequireDefault(_reactNativeInvertibleScrollView);var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);var _lodash=require('lodash/index.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);var 
+
 
 
 Component=_reactNative2.default.Component;var Text=_reactNative2.default.Text;var StyleSheet=_reactNative2.default.StyleSheet;var View=_reactNative2.default.View;var ScrollView=_reactNative2.default.ScrollView;var 
 
 Feed=(function(_Component){babelHelpers.inherits(Feed,_Component);function Feed(){var _Object$getPrototypeO;var _temp,_this,_ret;babelHelpers.classCallCheck(this,Feed);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=babelHelpers.possibleConstructorReturn(this,(_Object$getPrototypeO=Object.getPrototypeOf(Feed)).call.apply(_Object$getPrototypeO,[this].concat(args))),_this),_this.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -71789,19 +71788,21 @@ index!==_this.props.messages.length?messageStyles.push({borderBottomWidth:1,bord
 return (
 _reactNative2.default.createElement(View,{key:index,style:messageStyles},
 _reactNative2.default.createElement(Text,{style:styles.messageUser},message.user.username),
-_reactNative2.default.createElement(Text,{style:styles.messageContent},message.body)));},_temp),babelHelpers.possibleConstructorReturn(_this,_ret);}babelHelpers.createClass(Feed,[{key:'componentDidUpdate',value:function componentDidUpdate(){var _this2=this;var innerScrollView=this._scrollView.refs.InnerScrollView;var scrollView=this._scrollView.refs.ScrollView;requestAnimationFrame(function(){innerScrollView.measure(function(innerScrollViewX,innerScrollViewY,innerScrollViewWidth,innerScrollViewHeight){scrollView.measure(function(scrollViewX,scrollViewY,scrollViewWidth,scrollViewHeight){var scrollTo=innerScrollViewHeight-scrollViewHeight+innerScrollViewY;if(innerScrollViewHeight<scrollViewHeight){return;}_this2._scrollView.scrollTo(scrollTo);});});});}},{key:'render',value:function render()
+_reactNative2.default.createElement(Text,{style:styles.messageContent},message.body)));},_temp),babelHelpers.possibleConstructorReturn(_this,_ret);}babelHelpers.createClass(Feed,[{key:'componentDidUpdate',value:function componentDidUpdate(){window.scroller=this.refs.feed;this.refs.feed.scrollTo(0);}},{key:'render',value:function render()
 
 
 
 
-{var _this3=this;
+{var _this2=this;
 return (
-_reactNative2.default.createElement(ScrollView,{
-ref:function(component){return _this3._scrollView=component;},
-automaticallyAdjustContentInsets:false,
+_reactNative2.default.createElement(_reactNativeInvertibleScrollView2.default,{
+ref:'feed',
 style:styles.feed,
+renderScrollView:
+function(props){return _reactNative2.default.createElement(_reactNativeInvertibleScrollView2.default,babelHelpers.extends({},props,{inverted:true}));},
+
 showsHorizontalScrollIndicators:false},
-this.props.messages.map(function(message,i){return _this3.renderMessage(message,i);})));}}]);return Feed;})(Component);exports.default=Feed;
+this.props.messages.map(function(message,i){return _this2.renderMessage(message,i);})));}}]);return Feed;})(Component);exports.default=Feed;
 
 
 
@@ -71821,9 +71822,143 @@ color:'#666'},
 messageUser:{
 fontWeight:'bold'}});
 });
+__d('react-native-invertible-scroll-view/InvertibleScrollView.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+PropTypes=
+
+
+
+React.PropTypes;var ScrollView=React.ScrollView;var StyleSheet=React.StyleSheet;var View=React.View;
+var ScrollableMixin=require('react-native-scrollable-mixin/ScrollableMixin.js');
+
+var cloneReferencedElement=require('react-native-clone-referenced-element/cloneReferencedElement.js');
+
+
+
+
+
+var InvertibleScrollView=React.createClass({displayName:'InvertibleScrollView',
+mixins:[ScrollableMixin],
+
+propTypes:babelHelpers.extends({},
+ScrollView.propTypes,{
+inverted:PropTypes.bool,
+renderScrollComponent:PropTypes.func.isRequired}),
+
+
+getDefaultProps:function(){
+return {
+renderScrollComponent:function(props){return React.createElement(ScrollView,props);}};},
+
+
+
+getScrollResponder:function(){
+return this._scrollComponent.getScrollResponder();},
+
+
+setNativeProps:function(props){
+this._scrollComponent.setNativeProps(props);},
+
+
+render:function(){var _this=this;var _props=
+
+
+
+
+this.props;var inverted=_props.inverted;var renderScrollComponent=_props.renderScrollComponent;var props=babelHelpers.objectWithoutProperties(_props,['inverted','renderScrollComponent']);
+
+if(inverted){
+if(this.props.horizontal){
+props.style=[styles.horizontallyInverted,props.style];
+props.children=this._renderInvertedChildren(props.children,styles.horizontallyInverted);}else 
+{
+props.style=[styles.verticallyInverted,props.style];
+props.children=this._renderInvertedChildren(props.children,styles.verticallyInverted);}}
+
+
+
+return cloneReferencedElement(renderScrollComponent(props),{
+ref:function(component){_this._scrollComponent=component;}});},
+
+
+
+_renderInvertedChildren:function(children,inversionStyle){
+return React.Children.map(children,function(child){
+return child?React.createElement(View,{style:inversionStyle},child):child;});}});
+
+
+
+
+var styles=StyleSheet.create({
+verticallyInverted:{
+transform:[
+{scaleY:-1}]},
+
+
+horizontallyInverted:{
+transform:[
+{scaleX:-1}]}});
+
+
+
+
+module.exports=InvertibleScrollView;
+});
+__d('react-native-scrollable-mixin/ScrollableMixin.js',function(global, require, module, exports) {  var ScrollableMixin={
+getInnerViewNode:function(){
+return this.getScrollResponder().getInnerViewNode();},
+
+
+scrollTo:function(destY,destX){
+this.getScrollResponder().scrollTo(destY,destX);},
+
+
+scrollWithoutAnimationTo:function(destY,destX){
+this.getScrollResponder().scrollWithoutAnimationTo(destY,destX);}};
+
+
+
+module.exports=ScrollableMixin;
+});
+__d('react-native-clone-referenced-element/cloneReferencedElement.js',function(global, require, module, exports) {  'use strict';
+
+var React=require('react-native/Libraries/react-native/react-native.js');
+
+function cloneReferencedElement(element,config){
+var cloneRef=config.ref;
+var originalRef=element.ref;for(var _len=arguments.length,children=Array(_len>2?_len-2:0),_key=2;_key<_len;_key++){children[_key-2]=arguments[_key];}
+if(originalRef==null||cloneRef==null){
+return React.cloneElement.apply(React,[element,config].concat(children));}
+
+
+if(typeof originalRef!=='function'){
+if(__DEV__){
+console.warn(
+'Cloning an element with a ref that will be overwritten because it '+
+'is not a function. Use a composable callback-style ref instead. '+
+'Ignoring ref: '+originalRef);}
+
+
+return React.cloneElement.apply(React,[element,config].concat(children));}
+
+
+return React.cloneElement.apply(React,[element,babelHelpers.extends({},
+config,{
+ref:function(component){
+cloneRef(component);
+originalRef(component);}})].concat(
+
+children));}
+
+
+module.exports=cloneReferencedElement;
+});
 __d('BlabberNative/app/components/communicator.js',function(global, require, module, exports) {  Object.defineProperty(exports,"__esModule",{value:true});var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);var 
 
 Communicator=(function(_Component){babelHelpers.inherits(Communicator,_Component);function Communicator(){var _Object$getPrototypeO;var _temp,_this,_ret;babelHelpers.classCallCheck(this,Communicator);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=babelHelpers.possibleConstructorReturn(this,(_Object$getPrototypeO=Object.getPrototypeOf(Communicator)).call.apply(_Object$getPrototypeO,[this].concat(args))),_this),_this.
+
 
 
 
@@ -71836,24 +71971,26 @@ _this.setState({message:text});},_this.
 
 
 sendMessage=function(){
-if(_this.state.message===""||!_this.state.message)
+if(_this.state.message===''||!_this.state.message)
 return;
 
 _this.props.sendMessage(_this.props.currentUser,_this.state.message);
 _this.setState({message:null});},_temp),babelHelpers.possibleConstructorReturn(_this,_ret);}babelHelpers.createClass(Communicator,[{key:'render',value:function render()
 
 
-{
+{var _this2=this;
 return (
 _reactNative2.default.createElement(_reactNative.View,{style:styles.communicator},
 _reactNative2.default.createElement(_reactNative.TextInput,{
+ref:'input',
+onFocus:function(){return _this2.props.onFocused(_this2.refs.input);},
 value:this.state.message,
 style:styles.input,
 onChangeText:this.onChange,
 blurOnSubmit:false,
 placeholder:'Enter a message',
 enablesReturnKeyAutomatically:true,
-onSubmitEditing:this.sendMessage})));}}]);return Communicator;})(_reactNative.Component);Communicator.propTypes={currentUser:_reactNative.PropTypes.object.isRequired,sendMessage:_reactNative.PropTypes.func.isRequired};exports.default=Communicator;
+onSubmitEditing:this.sendMessage})));}}]);return Communicator;})(_reactNative.Component);Communicator.propTypes={currentUser:_reactNative.PropTypes.object.isRequired,sendMessage:_reactNative.PropTypes.func.isRequired,onFocused:_reactNative.PropTypes.func.isRequired};exports.default=Communicator;
 
 
 
@@ -71906,10 +72043,10 @@ _this.setState({changingCurrentUser:!_this.state.changingCurrentUser});},_this.
 onKeyPress=function(e){
 var key=e.nativeEvent.key;
 
-if(key==="Esc")
+if(key==='Esc')
 _this.toggleChangingCurrentUser();else 
 
-if(key==="Enter"){
+if(key==='Enter'){
 
 if(_lodash2.default.find(_this.props.users,function(u){return u.username===_this.state.username;}))return false;
 _this.props.setCurrentUser({user_id:_this.props.currentUser.id,username:_this.state.username});
@@ -72751,4 +72888,4 @@ module.exports=tweenFunctions;
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("BlabberNative/index.ios.js");
-__SSTOKENSTRING = "@generated SignedSource<<8d30da14b11b4da560165943a51d12ad>>";
+__SSTOKENSTRING = "@generated SignedSource<<7848d1c4675c551b413aeff83b946ce6>>";

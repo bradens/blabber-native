@@ -3,8 +3,10 @@ import Feed from './feed';
 import Communicator from './communicator';
 import Sidebar from './sidebar';
 import Drawer from 'react-native-drawer';
+import Dimensions from 'Dimensions';
+import Messenger from 'react-native-gifted-messenger';
 
-const { ScrollView, Component, View, Text, StyleSheet, StatusBarIOS } = React
+const { PixelRatio, ScrollView, Component, View, Text, StyleSheet, StatusBarIOS } = React
 
 export default class Home extends Component {
   onOpen() {
@@ -28,7 +30,18 @@ export default class Home extends Component {
     this._scrollToInput(inputRef);
   }
 
+  onSendMessage = (message, user) => {
+    if (message.text === '' || !message.text)
+      return
+
+    this.props.sendMessage(this.props.currentUser, message.text);
+  }
+
   render() {
+        // <ScrollView ref='scrollView' keyboardDismissMode='interactive' style={styles.container}>
+        //   <Feed {...this.props} />
+        //   <Communicator onFocused={this.onFocused} {...this.props} />
+        // </ScrollView>
     return (
       <Drawer
         openDrawerOffset={100}
@@ -38,10 +51,34 @@ export default class Home extends Component {
         content={<Sidebar onFocused={this.onFocused} { ...this.props } />}
         onOpen={this.onOpen}
         onClose={this.onClose}>
-        <ScrollView ref='scrollView' keyboardDismissMode='interactive' style={styles.container}>
-          <Feed {...this.props} />
-          <Communicator onFocused={this.onFocused} {...this.props} />
-        </ScrollView>
+        <Messenger
+          ref={c => this._Messenger = c}
+          messages={this.props.messages.map(m => { return { text: m.body, name: m.user.username, position: this.props.currentUser.user_id === m.user.user_id ? 'right' : 'left' } })}
+          handleSend={this.onSendMessage}
+          maxHeight={Dimensions.get('window').height - 20}
+          styles={{
+            container: {
+              flex: 1,
+              backgroundColor: '#fff',
+              paddingTop: 24
+            },
+            textInputContainer: {
+              height: 40,
+              borderColor: '#ddd',
+              flexDirection: 'row',
+              paddingLeft: 10,
+              paddingRight: 10,
+              borderTopWidth: 1,
+            },
+            bubbleLeft: {
+              backgroundColor: '#e6e6eb',
+              marginRight: 90,
+            },
+            bubbleRight: {
+              backgroundColor: '#007aff',
+              marginLeft: 90,
+            },
+          }} />
       </Drawer>
     );
   }
