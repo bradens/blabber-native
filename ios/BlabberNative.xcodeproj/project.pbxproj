@@ -618,6 +618,7 @@
 				INFOPLIST_FILE = BlabberNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = org.ruboss.BlabberNative;
 				PRODUCT_NAME = BlabberNative;
 			};
 			name = Debug;
@@ -634,7 +635,9 @@
 				INFOPLIST_FILE = BlabberNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = org.ruboss.BlabberNative;
 				PRODUCT_NAME = BlabberNative;
+				PROVISIONING_PROFILE = "40dc6ebb-a7ab-4033-83df-73179b60833f";
 			};
 			name = Release;
 		};

@@ -17,19 +17,6 @@ export default class Home extends Component {
     StatusBarIOS.setHidden(false, 'slide');
   }
 
-  _scrollToInput = (inputRef) => {
-    var scrollView = this.refs.scrollView.getScrollResponder();
-    scrollView.scrollResponderScrollNativeHandleToKeyboard(
-      React.findNodeHandle(inputRef),
-      20, // adjust depending on your contentInset
-      /* preventNegativeScrollOffset */ true
-    );
-  }
-
-  onFocused = (inputRef) => {
-    this._scrollToInput(inputRef);
-  }
-
   onSendMessage = (message, user) => {
     if (message.text === '' || !message.text)
       return
@@ -38,10 +25,6 @@ export default class Home extends Component {
   }
 
   render() {
-        // <ScrollView ref='scrollView' keyboardDismissMode='interactive' style={styles.container}>
-        //   <Feed {...this.props} />
-        //   <Communicator onFocused={this.onFocused} {...this.props} />
-        // </ScrollView>
     return (
       <Drawer
         openDrawerOffset={100}
@@ -56,7 +39,14 @@ export default class Home extends Component {
           messages={this.props.messages.map(m => { return { text: m.body, name: m.user.username, position: this.props.currentUser.user_id === m.user.user_id ? 'right' : 'left' } })}
           handleSend={this.onSendMessage}
           maxHeight={Dimensions.get('window').height - 20}
+          senderImage={null}
+          autoFocus={false}
           styles={{
+            rowContainer: {
+              flex: 1,
+              flexDirection: 'row',
+              marginBottom: 10,
+            },
             container: {
               flex: 1,
               backgroundColor: '#fff',
@@ -72,12 +62,25 @@ export default class Home extends Component {
             },
             bubbleLeft: {
               backgroundColor: '#e6e6eb',
-              marginRight: 90,
+              marginRight: 120,
+              marginLeft: 10,
+              flex: 0
+            },
+            name: {
+              color: '#aaaaaa',
+              fontSize: 12,
+              marginLeft: 10,
+              marginBottom: 5,
             },
             bubbleRight: {
               backgroundColor: '#007aff',
-              marginLeft: 90,
+              marginLeft: 120,
+              marginRight: 10,
+              flex: 0,
             },
+            imagePosition: {
+              width: 5
+            }
           }} />
       </Drawer>
     );

@@ -44,13 +44,26 @@ export default class Sidebar extends Component {
     }
   }
 
+  _scrollToInput = (inputRef) => {
+    var scrollView = this.refs.scrollView.getScrollResponder();
+    scrollView.scrollResponderScrollNativeHandleToKeyboard(
+      React.findNodeHandle(inputRef),
+      20, // adjust depending on your contentInset
+      /* preventNegativeScrollOffset */ true
+    );
+  }
+
+  onFocused = (inputRef) => {
+    this._scrollToInput(inputRef);
+  }
+
   onChangeUsername = (text) => {
     this.setState({ username: text });
   }
 
   render() {
     return (
-      <View style={styles.sidebar}>
+      <ScrollView ref="scrollView" style={styles.sidebar}>
         <Text style={styles.header}>Members</Text>
         <ScrollView style={styles.membersList}>
           { this.props.users.map((u, i) => {
@@ -66,6 +79,8 @@ export default class Sidebar extends Component {
           { this.state.changingCurrentUser ?
             <View >
               <TextInput
+                onFocus={() => this.onFocused(this.refs.input)}
+                ref="input"
                 style={styles.input}
                 onChangeText={this.onChangeUsername}
                 autoFocus={true}
@@ -82,7 +97,7 @@ export default class Sidebar extends Component {
               </View>
           }
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
