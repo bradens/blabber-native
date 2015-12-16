@@ -1,6 +1,4 @@
 import React from 'react-native';
-import Feed from './feed';
-import Communicator from './communicator';
 import Sidebar from './sidebar';
 import Drawer from 'react-native-drawer';
 import Dimensions from 'Dimensions';
